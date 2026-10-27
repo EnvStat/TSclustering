@@ -90,7 +90,7 @@ for (d in 1:3){
     
   fit_gmm <- function(K) {
     stan(
-      file = "sin_cos_sparse_simulations.stan",
+      file = "sin_cos_simulations.stan",
       data = list(
         N = dim(ynewz)[1],
         y=ynewz,
