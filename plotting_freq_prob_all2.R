@@ -55,54 +55,17 @@ fit_ss_theta_new<-array(c(fit_ss$theta),dim = c(num,K,d))
 reordered_theta<-permute.mcmc(fit_ss_theta_new, run$permutations)
 result_theta <- array(c(reordered_theta$output), dim = c(num,d,K))
 fit_ss_mu0_new<-fit_ss$Mu0
-
-###for phase###############
-if (length(dim(fit_ss$lambda))==4){
-  mcmc_phi<-fit_ss$phi
-  reordered_phi<-mcmc_phi
-  for (i in 1:d){
-    result<-permute.mcmc(mcmc_phi[,,i,], run$permutations)
-    reordered_phi[,,i,]<-result$output
+ #####permuted lambda (when there are covariates) #####
     
-  }
-  result_phi <- reordered_phi
-  
-  
-  #####for lambda (when there is phase)
-  
-  mcmc_lambda<-fit_ss$log_lambda_k
-  reordered_lambda<-mcmc_lambda
-  for (i in 1:d){
-    result<-permute.mcmc(mcmc_lambda[,,i,], run$permutations)
-    reordered_lambda[,,i,]<-result$output
+fit_ss_lambda_new<-fit_ss$log_lambda_k
+reordered_lambda<-permute.mcmc(fit_ss_lambda_new, run$permutations)
+dim(reordered_lambda)
+result_lambda <- array(c(reordered_lambda$output), dim = c(num,K,30))
     
-  }
-  result_lambda<-reordered_lambda
-  ##### Getting mean over iterations of phi
-  phi_mean<-apply(result_phi, c(2,3,4), mean)
-  phi_mean
-  dim(phi_mean)
-  freq_comp_cluster_phi<-result_phi
-  
-  phi<-reshape2::melt(freq_comp_cluster_phi)
-  
-  
-  colnames(phi)<-c("id","K","T","value")
-  
-  }else{
-  
-    #####permuted lambda (when there are covariates) #####
-    
-    fit_ss_lambda_new<-fit_ss$log_lambda_k
-    reordered_lambda<-permute.mcmc(fit_ss_lambda_new, run$permutations)
-    dim(reordered_lambda)
-    result_lambda <- array(c(reordered_lambda$output), dim = c(num,K,30))
-    
-    dim(result_lambda)
+dim(result_lambda)
     
     
     
-  }
 #####################################################################################
 #############################prepare mu for plotting#################################
 #####################################################################################
