@@ -21,3 +21,13 @@ Run code "simulations_accuracy_coverage.R"
 Run the code 'moth_clustering_species.R": To get the data and run the model.
 
 
+For data: 
+For species clustering: 
+abundance_species_trait_30.RData has species abundance, and all needed traits.
+For site: 
+Site_abundance_covariates.RData: contains the sparse abundance, effort and climatic covariates for 49 sampling sites and siteID.
+habitat_covariate_for_site.Rdata: contains the habitat covariates of each site. 
+
+
+
+
